@@ -1,0 +1,65 @@
+<!-- tpl-page-cart -->
+<div id="tpl-page-cart" class="container-fluid max1000 app-template">
+
+    <div id="tpl-page-cart-box" style="display: none;">
+        <div class="row">
+            <div class="col-md-12">
+            
+                <h1>Моя корзина (<span class="tpl-page-cart-counter">0</span>)</h1>
+
+                <table class="table cart-tbl">
+                    <thead class="text-muted"> 
+                    <tr> 
+                        <th style="width: 5%;">№</th>
+                        <th style="width: 20%;"></th>
+                        <th style="width: 40%;">Наименование</th>
+                        <th style="width: 2%;">Количество</th>
+                        <th style="width: 10%;"></th>
+                        <th style="width: 12%;">Цена</th>
+                        <th style="width: 8%;"></th>
+                    </tr> 
+                    </thead>
+                    <tbody id="tpl-page-cart-content">
+
+                    </tbody><!--/tpl-page-cart-content-->
+                </table>
+
+            </div>
+        </div><!--/row-->
+
+        <div class="row cart-border-top">
+            <div class="col-md-6">
+            
+                <form class="form-inline">
+                    <input type="text" class="form-control" id="exampleInputName2" placeholder="Промо-код">
+                    <button type="button" class="btn btn-default" disabled="disabled">Применить</button>
+                    <br/><br/>
+                    <p class="text-success">По промо-коду <mark>SALE</mark>, Вам предоставлена скидка в размере 15%</p>
+                </form>
+
+            </div>            
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-4">
+                <h3>Итого: <span id="cart-total-price"></span></h3>
+                <p>Доставка: <span class="label label-success">бесплатно по стране</span></p>
+                <br/>
+                <button type="button" class="btn btn-md btn-success" disabled="disabled">Оформить заказ</button>
+            </div>
+        </div><!--/row-->        
+        
+        <br/>
+        <br/>
+        
+    </div><!--tpl-page-cart-box-->
+    
+    <div id="tpl-page-cart-empty-msg" class="app-template" style="display: none;">
+        <h1 class="text-center">Корзина пуста</h1>  
+    </div><!--/tpl-page-cart-empty-msg-->
+    
+    <div class="row recently-viewed-content">
+    </div><!--/recently-viewed-content-->
+    
+</div>
+<!-- /tpl-page-cart -->

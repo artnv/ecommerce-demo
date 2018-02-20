@@ -1,0 +1,99 @@
+body {
+    font-size: 14px;
+}
+.max1000 {
+    max-width: 1000px;
+}
+.logo {
+    color: #fcfcfc;
+    float: left;
+    height: 25px;
+    padding: 12px 15px 0 15px;
+    font-size: 1.125em;
+    line-height: 1em;
+}
+.sublogo {
+    font-size: 0.7em;
+    color: #fcfcfc;
+}
+nav {
+    margin-bottom: 20px;
+}
+.pagination_mrgn {
+    margin: 0 !important;
+}
+.main {
+    padding-bottom: 100px;
+}
+#upd-label {
+    width: 100%;
+    text-align: center;
+    border-radius: 0px !important;
+    display: none;
+    margin-top: -20px;
+}
+#upd-label p {
+    padding: 10px;
+    border-radius: 4px;
+}
+.upd-label-canfly {
+    margin-top: 0px !important;
+    position: fixed;
+    z-index: 2;
+    left: 0px;
+    top: 0px;  
+}
+.bg {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    width: 100%;
+    height: 250px;
+    display: block;
+}
+.bg_fullpage {
+    height: 300px;
+    background-position: left center;
+}
+#breadcrumb {
+    display: none;
+}
+.app-template {
+    display: none;
+}
+.xline {
+    height: 1px;
+    background-color: #e3e3e3
+}
+.nodecoration  {
+    text-decoration: none;
+    color: inherit;
+}
+.nodecoration:hover {
+    text-decoration: none;
+    color: inherit;
+}
+.top3 {
+    margin-top: 3px;
+}
+.cart-border-top {
+    border-top: 1px solid #ddd;
+    padding-top: 30px;
+}
+.cart-tbl {
+    margin: 40px 0 40px 0;
+}
+.cart-tbl > thead > tr > th{
+    border-bottom: none;
+    font-weight: normal;
+    padding-bottom: 15px;
+}
+.cart-tbl > tbody > tr > td {
+    padding: 15px 10px 15px 10px;
+}
+.cart-tbl > tbody > tr > th {
+    font-weight: normal;
+}
+#tpl-page-cart .close {
+    font-size: 1em;
+}
