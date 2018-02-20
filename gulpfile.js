@@ -61,14 +61,14 @@ var imgs = [
 gulp.task('js', function() {
     return gulp.src(scripts)
     .pipe(uglify())
-    .pipe(concat('./boundle.js'))
+    .pipe(concat('./bundle.js'))
     .pipe(gulp.dest('./web/assets/js/'));
 });
 
 gulp.task('css', function () {
     return gulp.src(css)
     //.pipe(replace('../fonts/', 'assets/fonts/'))
-    .pipe(concatCss("./boundle.css"))
+    .pipe(concatCss("./bundle.css"))
     .pipe(cleanCSS({ level: 2 }))
     .pipe(gulp.dest('./web/assets/css/'));
 });
