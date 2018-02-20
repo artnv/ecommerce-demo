@@ -28,7 +28,7 @@ app.views.menuCategories = (function() {
             mainCat                 = '',
             selectedCatTitle        = '',
             itemsCnt;
-           
+        //--   
 
         for(;i<ln;i++) {
             
