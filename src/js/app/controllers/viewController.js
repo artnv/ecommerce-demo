@@ -94,6 +94,7 @@ app.views.viewController = (function() {
         case 'product':
             PRIVATE.setPageType(page);    
             template.$allTemplates.hide();
+            RECENTLY_VIEWED.template.$content.html('');
             PRODUCT_PAGE.template.$content.html('');
             PRODUCT_PAGE.template.$tpl.show();
             PRIVATE.scrollUp();
@@ -101,14 +102,14 @@ app.views.viewController = (function() {
         case 'page':
             PRIVATE.setPageType(page);  
             template.$allTemplates.hide();
-            //CATEGORY_PAGE.template.$content.html(''); чтобы не дергалось, закомментил
             CATEGORY_PAGE.template.$tpl.show();
             PRIVATE.scrollUp();
         break;
         case 'cart':
             PRIVATE.setPageType(page);  
             template.$allTemplates.hide();
-            //CATEGORY_PAGE.template.$content.html(''); чтобы не дергалось, закомментил
+            RECENTLY_VIEWED.template.$content.html('');
+            CART.template.$content.html('');
             CART.template.$tpl.show();
             //CART.template.$box.hide();
             //CART.template.$emptyMsg.show();
@@ -117,8 +118,9 @@ app.views.viewController = (function() {
         case 'accountProfile':
             PRIVATE.setPageType(page);  
             template.$allTemplates.hide();
+            RECENTLY_VIEWED.template.$content.html('');
             ACCOUNT_PROFILE.template.$tpl.show();
-            ACCOUNT_PROFILE.showProfilePage(); // Прямой вызов, т.к нет событий для страницы
+            ACCOUNT_PROFILE.showProfilePage(); // Прямой вызов отображения, т.к нет событий для статичной страницы
             PRIVATE.scrollUp();
         break;
         case '404':

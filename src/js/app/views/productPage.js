@@ -64,7 +64,10 @@ app.views.productPage = (function() {
         });
 
         PUBLIC.template.$content.html(html);
+        
+        app.eventManager.trigger('Views/productPage/showProductPage');
         console.timeEnd('productPage(getData+Render)');
+
     };
     
     PUBLIC.addDependencies = function(obj) {

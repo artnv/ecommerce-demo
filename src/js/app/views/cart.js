@@ -128,7 +128,8 @@ app.views.cart = (function() {
                 type        : 'cart',
                 title       : 'Корзина (0)'
             });
-
+            
+            app.eventManager.trigger('Views/cart/cartShowItems');
             return;
         }
         
@@ -179,7 +180,7 @@ app.views.cart = (function() {
 
         PUBLIC.template.$content.html(html);
         PUBLIC.template.$totalPrice.html('$' + totalPrice);
-        
+        app.eventManager.trigger('Views/cart/cartShowItems');
     };
     
     // Обновляет цифру количества элементов в корзине

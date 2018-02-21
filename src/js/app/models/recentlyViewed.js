@@ -34,7 +34,7 @@ app.models.recentlyViewed = (function() {
         var 
             json            = obj.json,
             arrItems        = browserStorage.getItems(),
-            maxElements     = 7,
+            maxElements     = 6,
             item;
         // --     
 
@@ -94,13 +94,12 @@ app.models.recentlyViewed = (function() {
         // Сохраняем
         app.eventManager.on('Models/productPage/getProductPage', function(data) {
             PUBLIC.addItem(data);
-            callGetItemsEvent();
         });
         
         // Отдаем
-        app.eventManager.on('Models/cart/getItems', callGetItemsEvent);
+        app.eventManager.on('Views/cart/cartShowItems', callGetItemsEvent);
         app.eventManager.on('Router/accountProfile', callGetItemsEvent);
-        app.eventManager.on('Models/productPage/getProductPage', callGetItemsEvent);
+        app.eventManager.on('Views/productPage/showProductPage', callGetItemsEvent);
         
     };
     

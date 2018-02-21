@@ -19,7 +19,7 @@ app.views.recentlyViewed = (function() {
         
         var
             items   = obj.items,
-            ln      = obj.items.length - 1,
+            ln      = obj.items.length,
             html    = '';
         // --
         

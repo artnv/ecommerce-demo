@@ -16,13 +16,13 @@ app.models.net = (function() {
 
     // End vars
     
-    // Автоматически опрашивает сервер на наличие обновлений
+    // Автоматически опрашивает сервер на наличие обновлений (например каждые 30 секунд)
     PRIVATE.contentAutoUpdate = function() {
         
         var 
             updTime         = DI.configMap.contentAutoUpdateTime,
             cacheEnabled    = DI.configMap.cacheEnabled,
-            lock            = false, // блокирует повторное обращение пока не придет ответ
+            lock            = false, // блокирует повторное обращение к серверу, пока не придет ответ
             checkUpdate;
             
         // Если значение у таймера 0 или кеш отключен. То проверка обновлений работать не будет
