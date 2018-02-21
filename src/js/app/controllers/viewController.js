@@ -18,6 +18,7 @@ app.views.viewController = (function() {
         // Dependency injection container
         DI = {
             //configMap
+            //modelController
         },
         
         // Views modules
@@ -88,7 +89,7 @@ app.views.viewController = (function() {
         stateMap.pageType = arg;
     };
     
-    // Переключение шаблонов
+    // Переключение и операции со статичными шаблонами
     PUBLIC.switchPage = function(page) {
         switch(page) {
         case 'product':
@@ -111,9 +112,9 @@ app.views.viewController = (function() {
             RECENTLY_VIEWED.template.$content.html('');
             CART.template.$content.html('');
             CART.template.$tpl.show();
-            //CART.template.$box.hide();
-            //CART.template.$emptyMsg.show();
-            PRIVATE.scrollUp();
+            PRIVATE.scrollUp(); 
+            // Очищаем номер последней страницы в хлебных крошках у товара, чтобы он не применялся к другим товарам
+            DI.modelController.flushLastPage(); 
         break;
         case 'accountProfile':
             PRIVATE.setPageType(page);  

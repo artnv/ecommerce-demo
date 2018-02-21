@@ -19,6 +19,10 @@ app.models.modelController = (function() {
         
     // End vars
 
+    PUBLIC.flushLastPage = function() {
+        stateMap.lastPageNum    = undefined;
+    };
+    
     PUBLIC.addDependencies = function(obj) {
         DI = obj;
     };

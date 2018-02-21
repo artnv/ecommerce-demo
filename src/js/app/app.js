@@ -3,10 +3,21 @@ var app = (function() {
     
     var
         configMap = {
-            contentAutoUpdateTime   : 0,            // Автоматическое обновление категорий, если добавися новый товар. Если 0 то функция отключена
-            defaultCategory         : 'main',       // alias категории "по умолчанию"
-            hideDefaultCategory     : false,        // Скрыть категорию "по умолчанию"
-            cacheEnabled            : true,         // Включение кеширования. Без него не работает автообновление
+            // Автоматическое обновление категорий, если добавился или удалился товар.
+            // Если 0 то функция отключена.
+            // Если больше нуля, например 30000, то каждые 30 секунд функция будет проверять контент
+            contentAutoUpdateTime   : 0,
+            
+            // alias категории "по умолчанию"
+            defaultCategory         : 'main',
+
+            // Скрыть категорию "по умолчанию"            
+            hideDefaultCategory     : false,
+            
+            // Включение кеширования. Без него не работает автообновление
+            cacheEnabled            : true,         
+            
+            // Путь к картинкам
             imagesPath              : 'uploads/images/'
         },
         
@@ -30,7 +41,7 @@ var app = (function() {
             VIEWS           = PUBLIC.views,
             CONTROLLERS     = PUBLIC.controllers,
             ROUTER          = PUBLIC.router;
-        // End vars
+        // --
 
        
        /* --------------------- Dependency injection --------------------- */
@@ -44,7 +55,8 @@ var app = (function() {
         });
 
         VIEWS.viewController.addDependencies({
-            configMap       : configMap
+            configMap           : configMap,
+            modelController     : MODELS.modelController
         });
 
 
@@ -55,19 +67,6 @@ var app = (function() {
         MODELS.modelController.initModule();
         ROUTER.initModule();
 
-
-        /* --------------------- DEMO (Далее можно всё удалять) --------------------- */
-        /*
-        setTimeout(function() {
-            // Эмулируем добавление нового продукта в каталог
-            VIEWS.updateLabel.showUpdLabel({
-                plus : 2,
-                alias : 'main',
-            });
-        }, 7000);
-        */
-        // end. DEMO
-        
     };
 
     
