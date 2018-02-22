@@ -31,7 +31,8 @@ app.views.viewController = (function() {
     PRIVATE.showBreadcrumbs = function(obj) {
 
         var 
-            html                = 'Категории',
+            start               = 'Категории',
+            html                = '',
             type                = obj.type,
             urlParamsStr        = '';
 
@@ -46,16 +47,20 @@ app.views.viewController = (function() {
             if(obj.lastPageNum) {
                 urlParamsStr = '/page/' + obj.lastPageNum;
             }
-        
-            html = '<li>'+ html +'</li><li><a href="#/'+ obj.alias + urlParamsStr +'">'+obj.catTitle+'</a></li><li class="active">'+ obj.pTitle +'</li>';
-
+            
+            html = '<ol class="breadcrumb">';
+            html += '<li>'+ start +'</li><li><a href="#/'+ obj.alias + urlParamsStr +'">'+obj.catTitle+'</a></li><li class="active">'+ obj.pTitle +'</li>';
+            html += '</ol>';
+            
             PRODUCT_PAGE.template.$breadcrumb.html(html);
             PRIVATE.setTitle(stateMap.defaultWindowTitle +' / '+ obj.catTitle +' / '+  obj.pTitle);
             
         break;        
         case 'page':
-
-            html = '<li>'+ html +'</li>' + '<li class="active">'+ obj.catTitle +'</li>';
+            
+            html = '<ol class="breadcrumb">';
+            html += '<li>'+ start +'</li>' + '<li class="active">'+ obj.catTitle +'</li>';
+            html += '</ol>';
             
             CATEGORY_PAGE.template.$breadcrumb.html(html);
             PRIVATE.setTitle(stateMap.defaultWindowTitle +' / '+obj.catTitle);

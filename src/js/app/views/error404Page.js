@@ -22,7 +22,7 @@ app.views.error404Page = (function() {
             title          : 'Ошибка 404. Страница не найдена!'
         });
         
-        var youtube = ' <p><iframe width="854" height="480" src="https://www.youtube.com/embed/UkSiywrWG3A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>';
+        var youtube = '<div class="embed-responsive embed-responsive-16by9"><iframe width="854" height="480" src="https://www.youtube.com/embed/UkSiywrWG3A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>';
         
         PUBLIC.template.$content.html('<h1>Ошибка 404</h1><p>Страница не найдена!</p><p><a class="btn btn-primary btn-lg" href="#/">Перейти на главную страницу</a></p>' + youtube);
     };

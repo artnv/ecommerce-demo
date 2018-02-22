@@ -52,7 +52,7 @@ app.views.productPage = (function() {
         html +=         '<p><button data-type="good" data-id="'+json.id+'" class="btn btn-primary '+cartBtnType+'" '+cartDisabled+'>'+cartMsg+'</button></p>';
         html +=     '</div><!--/.md-->';
         html += '</div><!--/.row-->';
-        html += '<br/><br/>';
+        html += '<br/><br/><hr>';
 
 
         DI.showBreadcrumbs({
