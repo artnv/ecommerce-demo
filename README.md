@@ -18,12 +18,20 @@
 
 ## Скриншоты
 
-![5](/screenshots/5.jpg?raw=true)
-![4](/screenshots/4.jpg?raw=true)
+![1](/screenshots/5.jpg?raw=true)
+
+![2](/screenshots/4.jpg?raw=true)
+
 ![3](/screenshots/3.jpg?raw=true)
-![2](/screenshots/2.jpg?raw=true)
-![1](/screenshots/1.jpg?raw=true)
-![1](/screenshots/xp1.jpg?raw=true)
-![1](/screenshots/xp2.jpg?raw=true)
-![1](/screenshots/xp3.jpg?raw=true)
-![1](/screenshots/xp4.jpg?raw=true)
+
+![4](/screenshots/2.jpg?raw=true)
+
+![5](/screenshots/1.jpg?raw=true)
+
+![6](/screenshots/xp1.JPG?raw=true)
+
+![7](/screenshots/xp2.JPG?raw=true)
+
+![8](/screenshots/xp3.JPG?raw=true)
+
+![9](/screenshots/xp4.JPG?raw=true)
