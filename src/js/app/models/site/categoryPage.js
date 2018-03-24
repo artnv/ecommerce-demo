@@ -8,26 +8,29 @@ app.models.categoryPage = (function() {
         DI = {
             //configMap
             //stateMap
+            //CART
         };
         
     // End var
     
     // Страница категорий с товарами
     PRIVATE.getCategoryPage = function(obj) {
-        
+
         var
-            json        = obj.json,
+            items       = obj.json.items,
+            itemsLn     = items.length,
             cat         = obj.cat,
-            pageNum     = obj.pageNum,
+            pageNum     = obj.pageNum, 
             result      = {
-                json        : json.items,
-                cat         : cat,
-                pageNum     : pageNum
+                pageNum     : pageNum,
+                catTitle    : obj.json.catTitle
             };
         // --
 
         if(!cat) {
             result.cat = DI.configMap.defaultCategory;
+        } else {
+            result.cat = cat;
         }
 
         // На главной начинать с первой страницы
@@ -38,6 +41,14 @@ app.models.categoryPage = (function() {
         DI.stateMap.lastPageNum    = pageNum;
         DI.stateMap.lastCat        = cat;
        
+        // Если товар добавлен в корзину
+        while(itemsLn--) {
+            if(DI.CART.inStorage(items[itemsLn].id)) {
+                items[itemsLn].inCart  = true;
+            }
+        }
+        result.items = items;
+        
         app.eventManager.trigger('Models/categoryPage/getCategoryPage', result);
     };
 
@@ -63,7 +74,6 @@ app.models.categoryPage = (function() {
             }
         }
         
-
         app.eventManager.trigger('Models/categoryPage/getCatLinks', {
             totalItems  : totalItems,
             pageNum     : pageNum,

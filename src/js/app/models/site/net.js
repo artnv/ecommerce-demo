@@ -3,7 +3,6 @@ app.models.net = (function() {
     
     var 
 
-        // Methods
         PUBLIC      = {},
         PRIVATE     = {},
         
@@ -24,7 +23,8 @@ app.models.net = (function() {
             cacheEnabled    = DI.configMap.cacheEnabled,
             lock            = false, // блокирует повторное обращение к серверу, пока не придет ответ
             checkUpdate;
-            
+        // --
+        
         // Если значение у таймера 0 или кеш отключен. То проверка обновлений работать не будет
         if(updTime <= 0 || !cacheEnabled) {
             return;
@@ -67,7 +67,8 @@ app.models.net = (function() {
                 json        : undefined
             },
             callEvent;           
-            
+        // --
+        
         callEvent = function(msg) {
             returnObj.json = msg;
             app.eventManager.trigger('Models/net/getMenuCategories', returnObj);
@@ -95,7 +96,7 @@ app.models.net = (function() {
 
     };
     
-    // Страница с товарами
+    // Страница категории
     PUBLIC.getCategoryPage = function(cat, pageNum) {
 
         var
@@ -107,6 +108,7 @@ app.models.net = (function() {
             },
             callEvent,
             ajx;
+        // --
         
         callEvent = function(msg) {
             returnObj.json = msg;

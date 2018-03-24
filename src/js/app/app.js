@@ -23,12 +23,16 @@ var app = (function() {
         
         PUBLIC = {
             
-            eventManager    : _.clone(Backbone.Events),
+            eventManager        : _.clone(Backbone.Events),
+            router              : undefined,
             
-            router          : undefined,
-            controllers     : {},
-            models          : {},
-            views           : {}
+            // Namespace
+            moduleManagers      : {},
+            components          : {},
+            widgets             : {},
+            controllers         : {},
+            models              : {},
+            views               : {}
 
         };
         
@@ -37,39 +41,42 @@ var app = (function() {
     PUBLIC.initModule = function() {
 
         var
-            MODELS          = PUBLIC.models,
-            VIEWS           = PUBLIC.views,
-            CONTROLLERS     = PUBLIC.controllers,
-            ROUTER          = PUBLIC.router;
+            ROUTER              = PUBLIC.router,
+            MODULE_MANAGERS     = PUBLIC.moduleManagers;
         // --
 
        
        /* --------------------- Dependency injection --------------------- */
         
-        CONTROLLERS.routerController.addDependencies({
+        MODULE_MANAGERS.controllersManager.addDependencies({
             configMap       : configMap
-        });      
+        });         
+ 
+        MODULE_MANAGERS.modelsManager.addDependencies({
+            configMap       : configMap
+        });        
         
-        MODELS.modelController.addDependencies({
+        MODULE_MANAGERS.widgetsManager.addDependencies({
             configMap       : configMap
         });
 
-        VIEWS.viewController.addDependencies({
-            configMap           : configMap,
-            modelController     : MODELS.modelController
+        MODULE_MANAGERS.viewsManager.addDependencies({
+            configMap       : configMap,
         });
-
+        
 
         /* --------------------- Initialization modules --------------------- */
         
-        VIEWS.viewController.initModule();
-        CONTROLLERS.routerController.initModule();
-        MODELS.modelController.initModule();
+        MODULE_MANAGERS.widgetsManager.initModule();
+        MODULE_MANAGERS.componentsManager.initModule();
+        MODULE_MANAGERS.viewsManager.initModule();
+        MODULE_MANAGERS.modelsManager.initModule();
+        MODULE_MANAGERS.controllersManager.initModule();
+        
         ROUTER.initModule();
 
     };
 
-    
     return PUBLIC;
     
 }());

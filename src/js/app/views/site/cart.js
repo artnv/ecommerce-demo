@@ -1,3 +1,4 @@
+// Корзина товаров
 app.views.cart = (function() {
     
     var
@@ -5,10 +6,11 @@ app.views.cart = (function() {
         
         // Dependency injection container
         DI = {
-            //showBreadcrumbs
+            //widgets
             //CATEGORY_PAGE
             //PRODUCT_PAGE
             //configMap
+            //switchTemplate
         };
         
     // End var
@@ -19,7 +21,8 @@ app.views.cart = (function() {
         $counter                : $('.tpl-page-cart-counter'),
         $emptyMsg               : $('#tpl-page-cart-empty-msg'),
         $box                    : $('#tpl-page-cart-box'),
-        $totalPrice             : $('#cart-total-price')
+        $totalPrice             : $('#cart-total-price'),
+        $recentlyViewed         : $('#tpl-page-cart .recently-viewed')
         //bindListeners
         //cartBtnListener
         //cartDeleteBtnListener
@@ -116,18 +119,23 @@ app.views.cart = (function() {
             e            = 0;
             
         // --
-
+        
+        PUBLIC.template.$recentlyViewed.html(
+            DI.widgets.recentlyViewed.getItemsHtml()
+        );
+        
+        DI.switchTemplate('cart');
+        
         // Если корзина пуста
         if(!obj || !obj.items || !obj.totalPrice) {
             
             PUBLIC.template.$emptyMsg.show();
             PUBLIC.template.$content.html();
             PUBLIC.template.$box.hide();
-
-            DI.showBreadcrumbs({
-                type        : 'cart',
-                title       : 'Корзина (0)'
-            });
+            
+            DI.widgets.title.set(
+                DI.widgets.title.getDefault() + ' / Корзина (0)'
+            );
             
             app.eventManager.trigger('Views/cart/cartShowItems');
             return;
@@ -143,10 +151,10 @@ app.views.cart = (function() {
             PUBLIC.template.$emptyMsg.hide();
             PUBLIC.template.$box.show();
 
-            DI.showBreadcrumbs({
-                type        : 'cart',
-                title       : 'Корзина ('+itemsQuantity+')'
-            });
+            DI.widgets.title.set(
+                DI.widgets.title.getDefault() + ' / Корзина ('+itemsQuantity+')'
+            );
+            
         }
 
         while(ln--) {
@@ -180,10 +188,10 @@ app.views.cart = (function() {
 
         PUBLIC.template.$content.html(html);
         PUBLIC.template.$totalPrice.html('$' + totalPrice);
-        app.eventManager.trigger('Views/cart/cartShowItems');
+        
     };
     
-    // Обновляет цифру количества элементов в корзине
+    // Обновляет цифру. Количество элементов в корзине
     PUBLIC.cartShowTotalItems = function(obj) {
         PUBLIC.template.$counter.html(obj.totalItems); 
     };

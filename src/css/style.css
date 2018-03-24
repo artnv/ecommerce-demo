@@ -97,3 +97,6 @@ nav {
 #tpl-page-cart .close {
     font-size: 1em;
 }
+.recently-viewed img {
+    max-height: 100px;
+}

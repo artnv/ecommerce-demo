@@ -15,9 +15,9 @@ app.views.updateLabel = (function() {
     // End var
     
     PUBLIC.template = {
-        $container      : $("#upd-label"),
+        $tpl            : $("#upd-label"),
         $plus           : $("#upd-label-plus"),
-        $minus          : undefined,                // Функционал есть, но не выводится (сколько удалили страниц)
+        $minus          : undefined,                // Сколько удалили страниц. Функционал есть, но не выводится
         $button         : $("#upd-label-btn")
         //bindListeners
     };
@@ -31,15 +31,15 @@ app.views.updateLabel = (function() {
         // Летающая плашка
         $(window).scroll(function() {
             if ($(window).scrollTop() > 51) {
-                PUBLIC.template.$container.addClass("upd-label-canfly");
+                PUBLIC.template.$tpl.addClass("upd-label-canfly");
             } else { 
-                PUBLIC.template.$container.removeClass("upd-label-canfly");
+                PUBLIC.template.$tpl.removeClass("upd-label-canfly");
             }
         });        
         
         // Кнопка обновления на летающей плашке
         PUBLIC.template.$button.click(function() {
-            PUBLIC.template.$container.hide();
+            PUBLIC.template.$tpl.hide();
             PRIVATE.onLabelPageUpdate(PRIVATE.updLabelAlias);
             PRIVATE.updLabelAlias = '';
         });
@@ -57,7 +57,7 @@ app.views.updateLabel = (function() {
            
            PRIVATE.updLabelAlias = obj.alias;
            
-           PUBLIC.template.$container.show();
+           PUBLIC.template.$tpl.show();
            PUBLIC.template.$plus.html('+' + obj.plus);
            
         }

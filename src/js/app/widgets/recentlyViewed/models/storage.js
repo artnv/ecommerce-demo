@@ -1,4 +1,4 @@
-app.models.recentlyViewed = (function() {
+app.widgets.recentlyViewed.storage = (function() {
     
     var 
         // Локальное хранилище в браузере
@@ -7,8 +7,12 @@ app.models.recentlyViewed = (function() {
         }, 
         
         PUBLIC      = {},
-        PRIVATE     = {};
-    
+
+        // Dependency injection container
+        DI = {
+            //maxItems
+        };
+        
     // End vars
    
     browserStorage.addItems = function(arr) {
@@ -34,7 +38,7 @@ app.models.recentlyViewed = (function() {
         var 
             json            = obj.json,
             arrItems        = browserStorage.getItems(),
-            maxElements     = 6,
+            maxItems        = DI.maxItems + 1, // +1 элемент понадобится когда будем исключать текущий
             item;
         // --     
 
@@ -42,8 +46,8 @@ app.models.recentlyViewed = (function() {
         
         if(PUBLIC.inStorage(json.id)) {return;}
         
-        // Добавляем новый элемент, а старый удаляем
-        if(arrItems.length >= maxElements) {
+        // Добавляем новый элемент, а старый удаляем, если достигнут лимит
+        if(arrItems.length >= maxItems) {
             arrItems.shift();
         }
         
@@ -81,26 +85,12 @@ app.models.recentlyViewed = (function() {
         
     };
     
+    PUBLIC.addDependencies = function(obj) {
+        DI = obj;
+    };
+    
     PUBLIC.initModule = function() {
-        
-        /* --------------------- Listeners --------------------- */
-        
-        var callGetItemsEvent = function() {
-            app.eventManager.trigger('Models/RecentlyViewed/getItems', {
-                items    : PUBLIC.getItems()
-            });
-        };
-        
-        // Сохраняем
-        app.eventManager.on('Models/productPage/getProductPage', function(data) {
-            PUBLIC.addItem(data);
-        });
-        
-        // Отдаем
-        app.eventManager.on('Views/cart/cartShowItems', callGetItemsEvent);
-        app.eventManager.on('Router/accountProfile', callGetItemsEvent);
-        app.eventManager.on('Views/productPage/showProductPage', callGetItemsEvent);
-        
+
     };
     
     return PUBLIC;

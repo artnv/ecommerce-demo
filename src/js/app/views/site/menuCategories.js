@@ -1,3 +1,4 @@
+// Меню с категориями
 app.views.menuCategories = (function() {
     
     var
@@ -5,7 +6,7 @@ app.views.menuCategories = (function() {
         
         // Dependency injection container
         DI = {
-            //showBreadcrumbs
+            
         };
         
     // End var
@@ -26,7 +27,6 @@ app.views.menuCategories = (function() {
             html                    = '',
             tmpHtml                 = '',
             mainCat                 = '',
-            selectedCatTitle        = '',
             itemsCnt;
         //--   
 
@@ -42,8 +42,6 @@ app.views.menuCategories = (function() {
             if(resultArr[i].alias === selectedCat) {
                 
                 tmpHtml = '<li class="active"><a href="#/'+resultArr[i].alias+'">'+resultArr[i].title+' '+itemsCnt+'</a></li>';
-
-                selectedCatTitle = resultArr[i].title;
                 
             } else {
                 tmpHtml = '<li><a href="#/'+resultArr[i].alias+'">'+resultArr[i].title+' '+itemsCnt+'</a></li>';
@@ -67,12 +65,6 @@ app.views.menuCategories = (function() {
         }
         
         html += mainCat;
-        
-        DI.showBreadcrumbs({
-            type        : 'page',
-            catTitle    : selectedCatTitle
-        });
-
         PUBLIC.template.$tpl.html(html);
     };
     

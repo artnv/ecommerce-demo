@@ -26,6 +26,15 @@ var scripts = [
     './src/js/app/app.js',
     './src/js/app/router.js',
 
+    // Module Managers
+    './src/js/app/moduleManagers/**/*.js',
+    
+    // Components
+    './src/js/app/components/**/*.js',
+    
+    // Widgets
+    './src/js/app/widgets/**/*.js',
+    
     // Views
     './src/js/app/views/**/*.js',
     
@@ -36,7 +45,7 @@ var scripts = [
     './src/js/app/controllers/**/*.js',
     
     // Запуск приложения
-    './src/js/autorun.js'
+    './src/js/app/autorun.js'
     
 ];
 

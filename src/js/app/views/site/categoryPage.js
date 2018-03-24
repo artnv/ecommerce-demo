@@ -1,3 +1,4 @@
+// Страница категории
 app.views.categoryPage = (function() {
     
     var
@@ -5,8 +6,9 @@ app.views.categoryPage = (function() {
         
         // Dependency injection container
         DI = {
-            //CART
             //configMap
+            //switchTemplate
+            //widgets
         };
         
     // End var
@@ -19,12 +21,13 @@ app.views.categoryPage = (function() {
     };
     
     PUBLIC.showCategoryPage = function(obj) {
- 
+
         var 
             html            = '',
             outHtml         = '',
-            json            = obj.json,
-            ln              = json.length,
+            items           = obj.items,
+            ln              = items.length,
+            catTitle        = obj.catTitle,
             cartDisabled    = '',
             cartMsg         = '',
             cartBtnType     = '',
@@ -34,7 +37,7 @@ app.views.categoryPage = (function() {
         for(i=0, e=1; i<ln; i++, e++) {
             
             // Если товар добавлен в корзину
-            if(DI.CART.inStorage(json[i].id)) {
+            if(items[i].inCart) {
                 cartBtnType     = 'btn-warning';
                 cartDisabled    = 'disabled="disabled"';
                 cartMsg         = 'Товар в корзине!';
@@ -45,24 +48,24 @@ app.views.categoryPage = (function() {
             }
             
             // Категория
-            cat         = json[i].categories_alias;
+            cat         = items[i].categories_alias;
             
             html +=  '<div class="col-sm-4 col-md-4">';
             html +=    '<div class="thumbnail">'; 
-            html +=      '<a href="#/'+cat+'/'+json[i].id+'" class="bg" style="background-image: url('+ DI.configMap.imagesPath + json[i].img +');"></a>';
+            html +=      '<a href="#/'+ cat +'/'+ items[i].id +'" class="bg" style="background-image: url('+ DI.configMap.imagesPath + items[i].img +');"></a>';
             html +=      '<div class="caption">';
-            html +=        '<a href="#/'+cat+'/'+json[i].id+'" class="nodecoration"><h4>'+json[i].title+'</h4></a>';
-            html +=        '<p class="text-muted">'+json[i].description.substring(0, 150)+'...</p><br/>';
+            html +=        '<a href="#/'+cat+'/'+ items[i].id +'" class="nodecoration"><h4>'+ items[i].title +'</h4></a>';
+            html +=        '<p class="text-muted">'+items[i].description.substring(0, 150)+'...</p><br/>';
 
             
             html +=        '<div class="pull-right">';
             //html +=            '<p class="text-muted text-right">Нет в наличии</p>';
             html +=            '<p class="text-success text-right">В наличии</p>';
-            html +=            '<button data-type="good" data-id="'+json[i].id+'" class="btn '+cartBtnType+'" '+cartDisabled+'><span class="glyphicon glyphicon-shopping-cart"></span> '+cartMsg+'</button>';
+            html +=            '<button data-type="good" data-id="'+ items[i].id +'" class="btn '+ cartBtnType +'" '+ cartDisabled +'><span class="glyphicon glyphicon-shopping-cart"></span> '+ cartMsg +'</button>';
             html +=        '</div><!--/pull-right-->';
             html +=        '<div class="top3">';
-            html +=            '<p><s class="h4 text-muted">$'+(parseInt(json[i].price)+10.00)+'</s></p>';
-            html +=            '<p><span class="h3">$'+json[i].price+'</span></p>';
+            html +=            '<p><s class="h4 text-muted">$'+ (parseInt(items[i].price)+10.00) +'</s></p>';
+            html +=            '<p><span class="h3">$'+ items[i].price +'</span></p>';
             html +=        '</div>';
             html +=        '<div class="clearfix"></div>';
 
@@ -79,7 +82,24 @@ app.views.categoryPage = (function() {
 
         }
 
+        DI.widgets.title.set(
+            DI.widgets.title.getDefault() + ' / ' + catTitle
+        );        
+        
+        PUBLIC.template.$breadcrumb.html(
+            DI.widgets.breadcrumbs.set([
+                {
+                    text    : 'Категории'
+                },
+                {
+                    active  : true,
+                    text    : catTitle
+                }
+            ])
+        );
+
         PUBLIC.template.$content.html(outHtml);
+        DI.switchTemplate('page');
         console.timeEnd('categoryPage(getData+Render)');
     };
     
@@ -104,7 +124,6 @@ app.views.categoryPage = (function() {
         if(!totalItems) {
             totalItems = 1;
         }
-      
       
         for(;i<=totalItems;i++) {
             

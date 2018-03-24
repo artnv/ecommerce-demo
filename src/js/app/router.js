@@ -17,10 +17,10 @@ app.router = (function() {
             'account/profile'   : 'accountProfile',
             'cart'              : 'cart',
             'cart/'             : 'cart',
+            ':cat/:id'          : 'productPage',
             ':cat'              : 'categoryPage',
             ':cat/'             : 'categoryPage',
             ':cat/page/:page'   : 'categoryPage',
-            ':cat/:id'          : 'productPage',
             '*random'           : 'pageNotFound'
         },
         
@@ -28,20 +28,20 @@ app.router = (function() {
            app.eventManager.trigger("Router/categoryPage", cat, page);
         },
         
-        productPage : function (cat, id) {
+        productPage     : function (cat, id) {
            app.eventManager.trigger("Router/productPage", cat, id);
         },   
         
-        pageNotFound : function () {
+        pageNotFound    : function () {
            app.eventManager.trigger("Router/pageNotFound");
         },        
         
-        cart : function () {
+        cart            : function () {
            app.eventManager.trigger("Router/cart");
         },
 
-        accountProfile : function () {
-           app.eventManager.trigger("Router/accountProfile");
+        accountProfile  : function () {
+           app.eventManager.trigger("Router/account/profile");
         }
         
     });

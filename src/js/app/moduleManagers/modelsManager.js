@@ -1,15 +1,7 @@
-// Инициализация всех моделей
-app.models.modelController = (function() {
+// Инициализация всех моделей и установка их зависимостей
+app.moduleManagers.modelsManager = (function() {
     
     var
-        // Динамически обновляемые параметры
-        stateMap = {
-            lastPageNum     : undefined,    // Для хлебных крошек. Номер с той страницы с которой перешли
-            catDiffArr      : undefined,    // Разница между новыми данными и из кеша
-            lastCat         : undefined     // Для повторного обновления меню-категорий, если без параметров в url 
-        },
-
-        PRIVATE = {},
         PUBLIC  = {},
         
         // Dependency injection container
@@ -17,20 +9,16 @@ app.models.modelController = (function() {
             //configMap
         };
         
-    // End vars
+    // End var
 
-    PUBLIC.flushLastPage = function() {
-        stateMap.lastPageNum    = undefined;
-    };
-    
     PUBLIC.addDependencies = function(obj) {
         DI = obj;
     };
     
     PUBLIC.initModule = function() {
         
-
         var 
+            COMPONENTS          = app.components,
             MODELS              = app.models,
             ROUTER              = app.router;
         // --
@@ -49,39 +37,36 @@ app.models.modelController = (function() {
         
         MODELS.menuCategories.addDependencies({
            configMap            : DI.configMap,
-           stateMap             : stateMap
+           stateMap             : COMPONENTS.stateStorage.stateMap
         });
         
         MODELS.categoryPage.addDependencies({
            configMap            : DI.configMap,
-           stateMap             : stateMap
+           stateMap             : COMPONENTS.stateStorage.stateMap,
+           CART                 : MODELS.cart
         });
         
         MODELS.productPage.addDependencies({
            configMap            : DI.configMap,
-           stateMap             : stateMap
+           stateMap             : COMPONENTS.stateStorage.stateMap,
+           CART                 : MODELS.cart
         });
         
         MODELS.autoUpdate.addDependencies({
            CACHE                : MODELS.cache,
-           stateMap             : stateMap
-        });
-        
-        MODELS.numberHint.addDependencies({
-           stateMap            : stateMap
+           stateMap             : COMPONENTS.stateStorage.stateMap
         });
         
         
         /* --------------------- Initialization modules --------------------- */
 
-        MODELS.recentlyViewed.initModule();
         MODELS.cart.initModule();
+        MODELS.cache.initModule();
         MODELS.net.initModule();
         MODELS.menuCategories.initModule();
         MODELS.categoryPage.initModule();
         MODELS.productPage.initModule();
         MODELS.autoUpdate.initModule();
-        MODELS.numberHint.initModule();
         
     };
     

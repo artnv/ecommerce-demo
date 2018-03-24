@@ -1,3 +1,4 @@
+// Страница с товаром
 app.views.productPage = (function() {
     
     var
@@ -5,17 +6,18 @@ app.views.productPage = (function() {
         
         // Dependency injection container
         DI = {
-            //showBreadcrumbs
-            //CART
             //configMap
+            //switchTemplate
+            //widgets
         };
         
     // End var
     
     PUBLIC.template = {
-        $tpl            : $('#tpl-page-product'),
-        $content        : $('#tpl-page-product-content'),
-        $breadcrumb     : $('#tpl-page-product-breadcrumb')
+        $tpl                : $('#tpl-page-product'),
+        $content            : $('#tpl-page-product-content'),
+        $breadcrumb         : $('#tpl-page-product-breadcrumb'),
+        $recentlyViewed     : $('#tpl-page-product .recently-viewed')
     };
 
     PUBLIC.showProductPage = function(obj) {
@@ -29,7 +31,7 @@ app.views.productPage = (function() {
         // --
         
         // Если товар добавлен в корзину
-        if(DI.CART.inStorage(json.id)) {
+        if(obj.inCart) {
             cartBtnType     = 'btn-warning';
             cartDisabled    = 'disabled="disabled"';
             cartMsg         = 'Товар в корзине!';
@@ -55,19 +57,34 @@ app.views.productPage = (function() {
         html += '<br/><br/><hr>';
 
 
-        DI.showBreadcrumbs({
-            type                : 'product',
-            pTitle              : json.title,
-            alias               : json.alias,
-            catTitle            : json.categories_title,
-            lastPageNum         : obj.lastPageNum
-        });
-
-        PUBLIC.template.$content.html(html);
+        DI.widgets.title.set(
+            DI.widgets.title.getDefault() +' / '+ json.categories_title +' / '+ json.title
+        );        
         
-        app.eventManager.trigger('Views/productPage/showProductPage');
+        PUBLIC.template.$breadcrumb.html(
+            DI.widgets.breadcrumbs.set([
+                {
+                    text    : 'Категории'
+                },
+                {
+                    text    : json.categories_title,
+                    link    : '#/'+ json.alias + (obj.lastPageNum ? '/page/' + obj.lastPageNum : '')
+                },
+                {
+                    active  : true,
+                    text    : json.title
+                }
+            ])
+        );
+        
+        PUBLIC.template.$recentlyViewed.html(
+            DI.widgets.recentlyViewed.getItemsHtml(json.id)
+        );
+        
+        PUBLIC.template.$content.html(html);
+ 
+        DI.switchTemplate('product');
         console.timeEnd('productPage(getData+Render)');
-
     };
     
     PUBLIC.addDependencies = function(obj) {

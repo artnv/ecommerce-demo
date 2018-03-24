@@ -1,3 +1,4 @@
+// Работа с корзиной
 app.models.cart = (function() {
     
     var 
@@ -7,7 +8,12 @@ app.models.cart = (function() {
         },
         
         PUBLIC      = {},
-        PRIVATE     = {};
+        PRIVATE     = {},
+        
+        // Dependency injection container
+        DI = {
+            //
+        };
 
     // End vars
    
@@ -90,6 +96,10 @@ app.models.cart = (function() {
         
         return false;
         
+    };
+        
+    PUBLIC.addDependencies = function(obj) {
+        DI = obj;
     };
     
     PUBLIC.initModule = function() {

@@ -1,4 +1,4 @@
-// Кеширования контента
+// Кеширование контента
 app.models.cache = (function() {
     
     var
@@ -131,7 +131,7 @@ app.models.cache = (function() {
     };
     
     PUBLIC.initModule = function() {
-        /* --------------------- Listeners --------------------- */
+
     };
     
     return PUBLIC;

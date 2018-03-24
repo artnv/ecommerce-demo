@@ -8,6 +8,7 @@ app.models.productPage = (function() {
         DI = {
             //configMap
             //stateMap
+            //CART
         };
         
     // End var
@@ -15,7 +16,11 @@ app.models.productPage = (function() {
     // Получение страницы с товаром
     PRIVATE.getProductPage = function(obj) {
         
-        var lastPageNum;
+        var 
+            inCart          = false,
+            json            = obj.json,
+            lastPageNum;
+        // --
         
         // Если перешли из категории общих товаров на страницу продукта, то не пишем в хлебных крошках номер страницы с которой пришли, т.к. страница уже указывает на свою родную категорию
         if(DI.stateMap.lastPageNum) {
@@ -24,9 +29,15 @@ app.models.productPage = (function() {
             }
         }
         
+         // Если товар добавлен в корзину
+        if(DI.CART.inStorage(json.id)) {
+            inCart = true;
+        }
+        
         app.eventManager.trigger('Models/productPage/getProductPage', {
-            json                : obj.json,
-            lastPageNum         : lastPageNum
+            json                : json,
+            lastPageNum         : lastPageNum,
+            inCart              : inCart
         });
 
     };
